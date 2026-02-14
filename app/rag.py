@@ -12,10 +12,11 @@ from app.config import CHUNK_SIZE, CHUNK_OVERLAP
 # -------------------------------
 # LLM (temperature 0 = no guessing)
 # -------------------------------
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0
-)
+def get_llm():
+    return ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0
+    )
 
 # -------------------------------
 # Vector Store
@@ -88,6 +89,8 @@ def ask_question(question: str):
     filtered_docs = [
         doc for doc, score in results if score <= MAX_DISTANCE
     ]
+
+    llm = get_llm()
 
 
     context = "\n\n".join(d.page_content for d in filtered_docs)
