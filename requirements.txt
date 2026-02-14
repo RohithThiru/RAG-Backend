@@ -1,8 +1,12 @@
 fastapi
 uvicorn
-langchain
-langchain-openai
-langchain-chroma
+
+langchain>=0.1.20
+langchain-core>=0.1.50
+langchain-community>=0.0.30
+langchain-openai>=0.0.8
+langchain-chroma>=0.1.0
+
 chromadb
 pypdf
 python-dotenv
