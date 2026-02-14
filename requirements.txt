@@ -10,3 +10,4 @@ langchain-chroma>=0.1.0
 chromadb
 pypdf
 python-dotenv
+python-multipart
