@@ -18,13 +18,17 @@ def get_llm():
         temperature=0
     )
 
+def get_embeddings():
+    return OpenAIEmbeddings()
+
 # -------------------------------
 # Vector Store
 # -------------------------------
-vectorstore = Chroma(
-    persist_directory="./chroma",
-    embedding_function=OpenAIEmbeddings()
-)
+def get_vectorstore():
+    return Chroma(
+        persist_directory="./chroma",
+        embedding_function=get_embeddings()
+    )
 
 # -------------------------------
 # Text Splitter
@@ -54,7 +58,9 @@ def ingest_pdf(file_path: str, filename: str):
         for chunk in text_splitter.split_text(full_text)
     ]
 
+    vectorstore = get_vectorstore()
     vectorstore.add_documents(docs)
+
 
 
 # =========================================================
