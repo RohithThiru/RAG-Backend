@@ -22,7 +22,9 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 @router.get("/documents")
 def list_documents():
-    return os.listdir("uploads")
+    from app.rag import list_documents
+    return list_documents()
+
 
 
 @router.post("/ask")

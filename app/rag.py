@@ -67,13 +67,20 @@ def ingest_pdf(file_path: str, filename: str):
 # LIST DOCUMENTS (OPTIONAL / UNCHANGED)
 # =========================================================
 def list_documents():
+    vectorstore = get_vectorstore()
     results = vectorstore.get(include=["metadatas"])
 
-    filenames = set()
-    for meta in results["metadatas"]:
-        filenames.add(meta.get("source"))
+    if not results or not results.get("metadatas"):
+        return []
 
-    return [{"filename": name} for name in filenames]
+    filenames = set()
+
+    for meta in results["metadatas"]:
+        if meta and "source" in meta:
+            filenames.add(meta["source"])
+
+    return [{"filename": name} for name in sorted(filenames)]
+
 
 
 # =========================================================
@@ -81,6 +88,7 @@ def list_documents():
 # =========================================================
 
 def ask_question(question: str):
+    vectorstore=get_vectorstore()
     results = vectorstore.similarity_search_with_score(
         question,
         k=3
