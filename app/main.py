@@ -7,13 +7,13 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",   # React
-        "http://127.0.0.1:3000",
-        "rohithrag.netlify.app"
+        "http://localhost:3000",
+        "https://rohithrag.netlify.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 app.include_router(router)
